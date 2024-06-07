@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.6.8/axios.js"></script>
+    <script src="https://unpkg.com/qs@6.10.2/dist/qs.js"></script>
+  </head>
+  <body>
+    nestjs
+    <input id="fileInput" type="file" multiple/>
+  </body>
+  <script>
+    const fileInput = document.querySelector('#fileInput');
+
+
+    async function urlParam() {
+      const res = await axios.get('/api/person/1');
+      console.log("url param: ", res.data);            
+    }
+    urlParam();
+
+    async function query() {
+      const res = await axios.get('/api/person/find', {
+        params: {
+          name: "zs",
+          age: 18
+        }
+      });
+      console.log("query: ", res.data);
+    }
+    query();
+
+    async function formUrlEncoded() {
+      const res = await axios.post('/api/person', Qs.stringify({ name: '李四', age: 66 }), {
+        headers: { 'content-type': 'application/x-www-form-urlencoded' }
+      });
+      // console.log("Qs.stringify: ", Qs.stringify({ name: '李四', age: 66 }));
+      console.log("form-urlencoded: ", res.data);
+    }
+    formUrlEncoded();
+
+    async function json() {
+      const res = await axios.post('/api/person', { name: '王二麻子', age: 45 });
+      console.log("json: ", res.data);
+    }
+    json();
+
+    async function formData() {
+      const data = new FormData();
+      data.set('name','尼古拉斯-赵四');
+      data.set('age', 47);
+      data.set('file1', fileInput.files[0]);
+      data.set('file2', fileInput.files[1]);
+
+      const res = await axios.post('/api/person/file', data, { headers: {
+        'content-type': 'multipart/form-data'
+      }});
+      console.log(res.data);
+    }
+
+    fileInput.onchange = formData;
+  </script>
+</html>

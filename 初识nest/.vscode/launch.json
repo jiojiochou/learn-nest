@@ -1,0 +1,45 @@
+{
+  // 使用 IntelliSense 了解相关属性。 
+  // 悬停以查看现有属性的描述。
+  // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      // debug名称
+      "name": "debug nest",
+      // 指定命令行命令
+      "runtimeExecutable": "nr",
+      // 命令行命令参数
+      "args": [
+        "start:dev",
+      ],
+      // 指定跳过文件
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      // 指定 console 为 integratedTerminal 用 vscode 的内置终端来打印日志
+      "console": "integratedTerminal",
+    },
+    {
+      "name": "Attach",
+      "port": 9229,
+      "request": "attach",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    },
+    {
+      "name": "Launch Program",
+      "program": "${workspaceFolder}/test.mjs",
+      "request": "launch",
+      "stopOnEntry": true,
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    }
+  ]
+}
