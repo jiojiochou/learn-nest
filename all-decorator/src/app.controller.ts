@@ -1,9 +1,15 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Inject } from '@nestjs/common';
 import { AppService } from './app.service';
 
-@Controller()
+// 申明controller
+@Controller('api')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  // 构造器注入
+  // constructor(private readonly appService: AppService) {}
+
+  // 属性注入
+  @Inject(AppService)
+  private readonly appService: AppService;
 
   @Get()
   getHello(): string {
