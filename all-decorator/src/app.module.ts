@@ -2,9 +2,10 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Sharp } from './sharp';
+import { AaaModule } from './aaa/aaa.module';
 
 @Module({
-  imports: [],
+  imports: [AaaModule],
   controllers: [AppController],
   providers: [
     AppService,
