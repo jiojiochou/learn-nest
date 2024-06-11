@@ -1,9 +1,26 @@
-import { Controller, Get, Inject, Optional } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Optional,
+  UseFilters,
+  Body,
+  SetMetadata,
+  UseGuards,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { Sharp } from './sharp';
+import { AaaService } from './aaa/aaa.service';
+import { TestFilter } from './test.filter';
+import { AppGuard } from './app.guard';
+// import { AppDto } from './app.dto';
 
 // 申明controller
 @Controller('api')
+@SetMetadata('roles', ['user'])
 export class AppController {
   // 构造器注入
   // constructor(@Optional() private readonly appService: AppService) {}
@@ -26,11 +43,31 @@ export class AppController {
   @Inject('Serious')
   private readonly serious: { slogan: string; hobby: string[] };
 
+  @Inject(AaaService)
+  private readonly aaaService: AaaService;
+
   @Get()
+  @UseFilters(TestFilter) // 应用 filter 捕获异常Exception
+  @SetMetadata('roles', ['admin'])
+  @UseGuards(AppGuard)
   getHello(): string {
     console.log('sharp: ', this.sharp.zai());
     console.log('severe: ', this.severe);
     console.log('Serious: ', this.serious);
+
+    console.log('global: ', this.aaaService.findAll());
+
+    throw new HttpException('xxx', HttpStatus.BAD_REQUEST);
     return this.appService.getHello();
+  }
+
+  @Post('getHello1')
+  // getHello1(@Body() aaa: AppDto) {
+  //   console.log('AppDto: ', aaa, 'a: ', typeof aaa.a, 'b: ', typeof aaa.b);
+  //   return 'hello';
+  // }
+  getHello1(@Body() aaa: { a: number; b: number }) {
+    console.log('AppDto: ', aaa, 'a: ', typeof aaa.a, 'b: ', typeof aaa.b);
+    return 'hello';
   }
 }
