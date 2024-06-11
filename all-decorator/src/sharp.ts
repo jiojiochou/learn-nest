@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class Diao {
+export class Sharp {
   zai() {
-    return 'diao.zai';
+    return 'Sharp.zai';
   }
 }
