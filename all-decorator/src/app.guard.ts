@@ -15,6 +15,7 @@ export class AppGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
+    console.log('------------------------------------');
     console.log('app.guard');
     console.log('guard.context.getClass', context.getClass());
     console.log('guard.context.getHandler', context.getHandler());

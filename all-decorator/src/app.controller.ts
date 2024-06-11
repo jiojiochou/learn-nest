@@ -10,6 +10,8 @@ import {
   Body,
   SetMetadata,
   UseGuards,
+  Headers,
+  Ip,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Sharp } from './sharp';
@@ -50,14 +52,23 @@ export class AppController {
   @UseFilters(TestFilter) // 应用 filter 捕获异常Exception
   @SetMetadata('roles', ['admin'])
   @UseGuards(AppGuard)
-  getHello(): string {
+  getHello(
+    @Headers('Accept') accept: string,
+    @Headers() headers: Record<string, any>,
+  ): string {
+    console.log('------------------------------------');
     console.log('sharp: ', this.sharp.zai());
     console.log('severe: ', this.severe);
     console.log('Serious: ', this.serious);
 
     console.log('global: ', this.aaaService.findAll());
+    console.log('------------------------------------');
+
+    console.log('accept: ', accept);
+    console.log('headers: ', headers);
 
     throw new HttpException('xxx', HttpStatus.BAD_REQUEST);
+    console.log('------------------------------------');
     return this.appService.getHello();
   }
 
