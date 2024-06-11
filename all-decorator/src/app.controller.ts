@@ -81,4 +81,12 @@ export class AppController {
     console.log('AppDto: ', aaa, 'a: ', typeof aaa.a, 'b: ', typeof aaa.b);
     return 'hello';
   }
+
+  @Get('/ip')
+  ip(@Ip() ip: string) {
+    console.log('------------------------------------');
+    console.log('ip: ', ip);
+    console.log('------------------------------------');
+    return ip;
+  }
 }
