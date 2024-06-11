@@ -6,6 +6,18 @@ import { Sharp } from './sharp';
 @Module({
   imports: [],
   controllers: [AppController],
-  providers: [AppService, Sharp],
+  providers: [
+    AppService,
+    Sharp,
+    // 使用 useFactory 声明 provide
+    {
+      provide: 'Severe',
+      useFactory() {
+        return {
+          name: 'qWer',
+        };
+      },
+    },
+  ],
 })
 export class AppModule {}
