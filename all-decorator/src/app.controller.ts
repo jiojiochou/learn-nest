@@ -12,6 +12,7 @@ import {
   UseGuards,
   Headers,
   Ip,
+  Session,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Sharp } from './sharp';
@@ -88,5 +89,13 @@ export class AppController {
     console.log('ip: ', ip);
     console.log('------------------------------------');
     return ip;
+  }
+
+  @Get('session')
+  session(@Session() session) {
+    console.log('------------------------------------');
+    console.log(session);
+    console.log('------------------------------------');
+    return session;
   }
 }
