@@ -51,8 +51,9 @@ export class AppController {
 
   @Get()
   @UseFilters(TestFilter) // 应用 filter 捕获异常Exception
-  @SetMetadata('roles', ['admin'])
-  @UseGuards(AppGuard)
+  @SetMetadata('roles', ['admin']) // 通过@SetMetadata 设置元数据
+  @UseGuards(AppGuard) // 通过@UseGuards()配合reflector 拿到元数据
+  // 通过@Headers() 拿到请求头
   getHello(
     @Headers('Accept') accept: string,
     @Headers() headers: Record<string, any>,
@@ -67,9 +68,9 @@ export class AppController {
 
     console.log('accept: ', accept);
     console.log('headers: ', headers);
+    console.log('------------------------------------');
 
     throw new HttpException('xxx', HttpStatus.BAD_REQUEST);
-    console.log('------------------------------------');
     return this.appService.getHello();
   }
 
@@ -79,11 +80,14 @@ export class AppController {
   //   return 'hello';
   // }
   getHello1(@Body() aaa: { a: number; b: number }) {
+    console.log('------------------------------------');
     console.log('AppDto: ', aaa, 'a: ', typeof aaa.a, 'b: ', typeof aaa.b);
+    console.log('------------------------------------');
     return 'hello';
   }
 
   @Get('/ip')
+  // 通过@Ip() 拿到请求的ip
   ip(@Ip() ip: string) {
     console.log('------------------------------------');
     console.log('请求的ip: ', ip);
@@ -92,6 +96,7 @@ export class AppController {
   }
 
   @Get('session')
+  // 通过 @Session() 拿到session对象
   session(@Session() session) {
     console.log('------------------------------------');
     console.log('session: ', session);
