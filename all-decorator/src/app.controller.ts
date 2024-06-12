@@ -94,7 +94,7 @@ export class AppController {
   @Get('session')
   session(@Session() session) {
     console.log('------------------------------------');
-    console.log(session);
+    console.log('session: ', session);
     console.log('------------------------------------');
     return session;
   }
