@@ -101,6 +101,10 @@ export class AppController {
     console.log('------------------------------------');
     console.log('session: ', session);
     console.log('------------------------------------');
-    return session;
+    if (!session.count) {
+      session.count = 0;
+    }
+    session.count += 1;
+    return session.count;
   }
 }
