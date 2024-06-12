@@ -86,7 +86,7 @@ export class AppController {
   @Get('/ip')
   ip(@Ip() ip: string) {
     console.log('------------------------------------');
-    console.log('ip: ', ip);
+    console.log('请求的ip: ', ip);
     console.log('------------------------------------');
     return ip;
   }
