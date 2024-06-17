@@ -8,14 +8,17 @@ export class App01Controller {
   hello1() {
     return 'hello app01.controller /';
   }
-  @Get('bbb')
+  @Get('HostParam')
   // 通过@HostParam('host') 把 host里的参数取出来
   hello2(@HostParam('host') host) {
     console.log('host: ', host);
-    return 'hello app01.controller /bbb' + host;
+    return {
+      "HostParam('host')": host,
+      slogan: `hello app01.controller /HostParam: ${host}`,
+    };
   }
 
-  @Get('ccc')
+  @Get('req')
   // 通过@Req() 取出request对象
   // hello3(@Req() req: Request) {
   //   console.log('req: ', req.hostname);
@@ -24,8 +27,10 @@ export class App01Controller {
   // }
   // 通过@Request() 取出request对象
   hello3(@请求() req: Request) {
-    console.log('req: ', req.hostname);
-    console.log('req: ', req.url);
-    return 'hello app01.controller /ccc';
+    return {
+      hostname: req.hostname,
+      url: req.url,
+      slogan: 'hello app01.controller /req',
+    };
   }
 }
