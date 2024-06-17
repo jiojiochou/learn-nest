@@ -1,4 +1,6 @@
-import { Controller, Get, HostParam } from '@nestjs/common';
+import { Controller, Get, HostParam, Request as 请求 } from '@nestjs/common';
+// import { Req } from '@nestjs/common'
+import { Request } from 'express';
 
 @Controller({ host: ':host.0.0.1', path: 'aaa' })
 export class App01Controller {
@@ -11,5 +13,19 @@ export class App01Controller {
   hello2(@HostParam('host') host) {
     console.log('host: ', host);
     return 'hello app01.controller /bbb' + host;
+  }
+
+  @Get('ccc')
+  // 通过@Req() 取出request对象
+  // hello3(@Req() req: Request) {
+  //   console.log('req: ', req.hostname);
+  //   console.log('req: ', req.url);
+  //   return 'hello app01.controller /ccc';
+  // }
+  // 通过@Request() 取出request对象
+  hello3(@请求() req: Request) {
+    console.log('req: ', req.hostname);
+    console.log('req: ', req.url);
+    return 'hello app01.controller /ccc';
   }
 }
