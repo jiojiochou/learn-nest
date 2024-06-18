@@ -2,11 +2,12 @@ import {
   Controller,
   Get,
   HostParam,
+  Next,
   Response as 响应,
   Request as 请求,
 } from '@nestjs/common';
 // import { Req } from '@nestjs/common'
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 @Controller({ host: ':host.0.0.1', path: 'aaa' })
 export class App01Controller {
@@ -51,5 +52,18 @@ export class App01Controller {
   res(@响应({ passthrough: true }) res: Response) {
     res;
     return 'res';
+  }
+
+  @Get('next')
+  next1(@Next() next: NextFunction) {
+    console.log('handler1');
+    next();
+    return '111';
+  }
+
+  @Get('next')
+  next2() {
+    console.log('handler2');
+    return 'eee';
   }
 }
