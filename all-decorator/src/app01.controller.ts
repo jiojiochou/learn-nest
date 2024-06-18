@@ -6,6 +6,7 @@ import {
   HttpCode,
   Next,
   Redirect,
+  Render,
   Response as 响应,
   Request as 请求,
 } from '@nestjs/common';
@@ -101,6 +102,16 @@ export class App01Controller {
     return {
       url: 'https://www.baidu.com',
       statusCode: 302,
+    };
+  }
+
+  @Get('Render')
+  // 使用 @Render() 设置响应内容
+  @Render('user')
+  user() {
+    return {
+      name: 'zs',
+      age: 18,
     };
   }
 }
