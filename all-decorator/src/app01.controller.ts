@@ -73,6 +73,8 @@ export class App01Controller {
   // handler 默认返回的是200状态码 通过@HttpCode(222) 来修改状态码
   @HttpCode(222)
   next3() {
-    return 'eee';
+    return {
+      httpCode: 222,
+    };
   }
 }
