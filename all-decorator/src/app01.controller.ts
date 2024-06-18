@@ -93,4 +93,14 @@ export class App01Controller {
   // 使用 @Redirect() 设置路由重定向的url
   @Redirect('http://juejin.cn')
   redirect() {}
+
+  @Get('Redirect1')
+  @Redirect()
+  jump() {
+    // 使用返回值 设置重定向的url
+    return {
+      url: 'https://www.baidu.com',
+      statusCode: 302,
+    };
+  }
 }
