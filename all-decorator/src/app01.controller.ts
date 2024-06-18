@@ -1,6 +1,7 @@
 import {
   Controller,
   Get,
+  Header,
   HostParam,
   HttpCode,
   Next,
@@ -75,6 +76,15 @@ export class App01Controller {
   next3() {
     return {
       httpCode: 222,
+    };
+  }
+
+  @Get('Header')
+  // 使用 @Header() 设置响应头
+  @Header('custom', 'header')
+  next4() {
+    return {
+      custom: 'header',
     };
   }
 }
