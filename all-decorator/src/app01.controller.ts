@@ -5,6 +5,7 @@ import {
   HostParam,
   HttpCode,
   Next,
+  Redirect,
   Response as 响应,
   Request as 请求,
 } from '@nestjs/common';
@@ -87,4 +88,9 @@ export class App01Controller {
       custom: 'header',
     };
   }
+
+  @Get('Redirect')
+  // 使用 @Redirect() 设置路由重定向的url
+  @Redirect('http://juejin.cn')
+  redirect() {}
 }
