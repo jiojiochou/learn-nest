@@ -2,6 +2,7 @@ import {
   Controller,
   Get,
   HostParam,
+  HttpCode,
   Next,
   Response as 响应,
   Request as 请求,
@@ -58,12 +59,20 @@ export class App01Controller {
   next1(@Next() next: NextFunction) {
     console.log('handler1');
     next();
+    // Nest不会处理注入 @Next() 的handler的返回值
     return '111';
   }
 
   @Get('next')
   next2() {
     console.log('handler2');
+    return 'eee';
+  }
+
+  @Get('HttpCode')
+  // handler 默认返回的是200状态码 通过@HttpCode(222) 来修改状态码
+  @HttpCode(222)
+  next3() {
     return 'eee';
   }
 }
