@@ -106,9 +106,10 @@ export class App01Controller {
   }
 
   @Get('Render')
-  // 使用 @Render() 设置响应内容
-  @Render('user')
+  // 使用 @Render() 设置响应模板内容
+  @Render('user') // 找到 views 下的user.hbs
   user() {
+    // 返回值会插入 user.hbs <p>name: {{ name }}</p> <p>age: {{ age }}</p>
     return {
       name: 'zs',
       age: 18,
