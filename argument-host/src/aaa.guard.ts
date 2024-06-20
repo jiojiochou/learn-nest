@@ -21,7 +21,6 @@ export class AaaGuard implements CanActivate {
 
     const { user } = context.switchToHttp().getRequest();
 
-    debugger;
     return requiredRoles.some((role) => user && user.roles?.includes(role));
   }
 }
