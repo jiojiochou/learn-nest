@@ -28,7 +28,7 @@ export class AaaGuard implements CanActivate {
     );
 
     if (permission?.length) {
-      return permission.some((r) => ['admin', 'common'].includes(r));
+      return ['admin', 'common'].every((r) => permission.includes(r));
     }
 
     return ['唱', '跳', 'rap', '篮球'].some((r) => metaData?.includes(r));
