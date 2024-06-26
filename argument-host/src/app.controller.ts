@@ -1,10 +1,17 @@
-import { Controller, Get, UseFilters, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  UseFilters,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { AaaFilter } from './aaa.filter';
 import { AaaException } from './AaaException';
 import { AaaGuard } from './aaa.guard';
 import { Roles } from './roles.decorator';
 import { Role } from './role';
+import { AaaInterceptor } from './aaa.interceptor';
 
 @Controller()
 export class AppController {
@@ -15,6 +22,13 @@ export class AppController {
   @Roles(Role.Admin)
   guard(): string {
     return 'guard';
+  }
+
+  @Get('interceptor')
+  @Roles(Role.Admin)
+  @UseInterceptors(AaaInterceptor)
+  interceptor() {
+    return 'interceptor';
   }
 
   @Get()
