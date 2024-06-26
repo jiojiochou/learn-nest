@@ -5,4 +5,10 @@ export class AppService {
   getHello(): string {
     return 'Hello World!';
   }
+
+  guard() {
+    return {
+      inspect: true,
+    };
+  }
 }
