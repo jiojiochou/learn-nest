@@ -4,10 +4,16 @@ import { AaaGuard } from './aaa.guard';
 import { Aaa } from './aaa.decorator';
 import { Bbb } from './bbb.decorator';
 import { Ccc } from './ccc.decorator';
+import { MyHeaders } from './my-headers.decorator';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
+
+  @Get('myHeaders')
+  myHeaders(@MyHeaders('host') myHeaders) {
+    return myHeaders;
+  }
 
   @Get('customParams-decorator')
   params(@Ccc() c) {
