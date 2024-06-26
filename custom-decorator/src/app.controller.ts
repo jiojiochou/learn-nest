@@ -2,6 +2,7 @@ import {
   Controller,
   Get,
   Headers,
+  Query,
   SetMetadata,
   UseGuards,
 } from '@nestjs/common';
@@ -11,10 +12,19 @@ import { Aaa } from './aaa.decorator';
 import { Bbb } from './bbb.decorator';
 import { Ccc } from './ccc.decorator';
 import { MyHeaders } from './my-headers.decorator';
+import { MyQuery } from './my-query.decorator';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
+
+  @Get('myQuery')
+  myQuery(@Query('name') query1, @MyQuery('age') query2) {
+    return {
+      query1,
+      query2,
+    };
+  }
 
   @Get('myHeaders')
   myHeaders(@Headers('Accept') headers, @MyHeaders('Accept') myHeaders) {
