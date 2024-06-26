@@ -22,6 +22,15 @@ export class AaaGuard implements CanActivate {
       context.getHandler(),
     );
 
+    const permission = this.reflector.get<string[] | undefined>(
+      'aaa',
+      context.getHandler(),
+    );
+
+    if (permission?.length) {
+      return permission.some((r) => ['admin', 'common'].includes(r));
+    }
+
     return ['唱', '跳', 'rap', '篮球'].some((r) => metaData?.includes(r));
   }
 }
