@@ -17,7 +17,7 @@ export class AaaGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    const metaData = this.reflector.get<string[] | undefined>(
+    const slogan = this.reflector.get<string[] | undefined>(
       'slogan',
       context.getHandler(),
     );
@@ -27,10 +27,20 @@ export class AaaGuard implements CanActivate {
       context.getHandler(),
     );
 
+    const xy = this.reflector.get<string[] | undefined>(
+      'ddd',
+      context.getClass(),
+    );
+
     if (permission?.length) {
       return ['admin', 'common'].every((r) => permission.includes(r));
     }
 
-    return ['唱', '跳', 'rap', '篮球'].some((r) => metaData?.includes(r));
+    if (xy?.length) {
+      console.log('xy: ', xy);
+      return true;
+    }
+
+    return ['唱', '跳', 'rap', '篮球'].some((r) => slogan?.includes(r));
   }
 }

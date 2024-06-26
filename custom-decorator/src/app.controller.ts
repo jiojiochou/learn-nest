@@ -1,5 +1,5 @@
 import {
-  Controller,
+  // Controller,
   Get,
   Headers,
   ParseIntPipe,
@@ -14,9 +14,10 @@ import { Bbb } from './bbb.decorator';
 import { Ccc } from './ccc.decorator';
 import { MyHeaders } from './my-headers.decorator';
 import { MyQuery } from './my-query.decorator';
+import { Ddd } from './ddd.decorator';
 // import { ParseIntPipePipe } from './parse-int-pipe.pipe';
 
-@Controller()
+@Ddd('ddd', ['xxx', 'yyy'])
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
