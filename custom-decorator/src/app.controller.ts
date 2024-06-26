@@ -13,13 +13,17 @@ import { Bbb } from './bbb.decorator';
 import { Ccc } from './ccc.decorator';
 import { MyHeaders } from './my-headers.decorator';
 import { MyQuery } from './my-query.decorator';
+import { ParseIntPipePipe } from './parse-int-pipe.pipe';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get('myQuery')
-  myQuery(@Query('name') query1, @MyQuery('age') query2) {
+  myQuery(
+    @Query('name') query1,
+    @MyQuery('age', new ParseIntPipePipe() /** 自定义ParseIntPipe */) query2,
+  ) {
     return {
       query1,
       query2,
