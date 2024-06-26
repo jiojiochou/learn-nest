@@ -3,10 +3,17 @@ import { AppService } from './app.service';
 import { AaaGuard } from './aaa.guard';
 import { Aaa } from './aaa.decorator';
 import { Bbb } from './bbb.decorator';
+import { Ccc } from './ccc.decorator';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
+
+  @Get('customParams-decorator')
+  params(@Ccc() c) {
+    // 参数装饰器的返回值就是 参数c的值
+    return c;
+  }
 
   @Bbb('merge-decorator', 'admin')
   merge() {
