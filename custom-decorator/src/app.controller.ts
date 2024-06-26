@@ -1,4 +1,10 @@
-import { Controller, Get, SetMetadata, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Headers,
+  SetMetadata,
+  UseGuards,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { AaaGuard } from './aaa.guard';
 import { Aaa } from './aaa.decorator';
@@ -11,8 +17,11 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get('myHeaders')
-  myHeaders(@MyHeaders('host') myHeaders) {
-    return myHeaders;
+  myHeaders(@Headers('Accept') headers, @MyHeaders('Accept') myHeaders) {
+    return {
+      headers,
+      myHeaders,
+    };
   }
 
   @Get('customParams-decorator')
