@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Inject,
 } from '@nestjs/common';
 import { AaaService } from './aaa.service';
 import { CreateAaaDto } from './dto/create-aaa.dto';
@@ -13,7 +14,10 @@ import { UpdateAaaDto } from './dto/update-aaa.dto';
 
 @Controller('aaa')
 export class AaaController {
-  constructor(private readonly aaaService: AaaService) {}
+  constructor(
+    private readonly aaaService: AaaService,
+    @Inject('CONFIG_OPTIONS') private configOptions: Record<string, any>,
+  ) {}
 
   @Post()
   create(@Body() createAaaDto: CreateAaaDto) {
@@ -22,6 +26,7 @@ export class AaaController {
 
   @Get()
   findAll() {
+    console.log(this.configOptions);
     return this.aaaService.findAll();
   }
 

@@ -2,10 +2,32 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AaaModule } from './aaa/aaa.module';
+import { CccModule } from './ccc/ccc.module';
 
 @Module({
-  imports: [AaaModule],
+  imports: [
+    AaaModule.register({
+      aaa: 123,
+      bbb: 456,
+    }),
+    CccModule,
+  ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: 'less',
+      useFactory() {
+        return {
+          name: 'zs',
+          age: 18,
+        };
+      },
+    },
+    {
+      provide: 'price',
+      useValue: 100,
+    },
+  ],
 })
 export class AppModule {}
