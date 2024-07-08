@@ -10,7 +10,10 @@ import { CccModule } from './ccc/ccc.module';
       aaa: 123,
       bbb: 456,
     }),
-    CccModule,
+    CccModule.register({
+      aaa: 100,
+      bbb: 200,
+    }),
   ],
   controllers: [AppController],
   providers: [
